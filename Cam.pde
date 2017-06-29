@@ -9,13 +9,19 @@ class Cam {
   PGraphics3D p3d;
   PMatrix3D proj, cam, modvw, modvwInv, screen2Model;
   
-  void initMatrices() {
+  String displayText = "";
+  PFont font;
+  int fontSize = 12;
+
+  void init() {
     p3d = (PGraphics3D) g;
     proj = new PMatrix3D();
     cam = new PMatrix3D();
     modvw = new PMatrix3D();
     modvwInv = new PMatrix3D();
     screen2Model = new PMatrix3D();
+    
+    font = createFont("Arial", fontSize);
   }
   
   PVector screenToWorldCoords(PVector p) {
@@ -40,28 +46,28 @@ class Cam {
     defaultPos();
     defaultPoi();
     defaultUp();
-    initMatrices();
+    init();
   }
   
   Cam(PVector _pos) {
     pos = _pos;
     defaultPoi();
     defaultUp();
-    initMatrices();
+    init();
   }
   
   Cam(PVector _pos, PVector _poi) {
     pos = _pos;
     poi = _poi;
     defaultUp();
-    initMatrices();
+    init();
   }
   
   Cam(PVector _pos, PVector _poi, PVector _up) {
     pos = _pos;
     poi = _poi;
     up = _up;
-    initMatrices();
+    init();
   }
   
   void update() {
@@ -71,6 +77,7 @@ class Cam {
   
   void draw() {
     camera(pos.x, pos.y, pos.z, poi.x, poi.y, poi.z, up.x, up.y, up.z);
+    drawText();
   }
   
   void run() {
@@ -106,6 +113,16 @@ class Cam {
     defaultPos();
     defaultPoi();
     defaultUp();
+  }
+  
+  void drawText() {
+    if (!displayText.equals("")) {
+      pushMatrix();  
+      translate((pos.x - (width/2)) + (fontSize/2), (pos.y - (height/2)) + fontSize, poi.z);
+      textFont(font, fontSize);
+      text(displayText, 0, 0);
+      popMatrix();
+    }
   }
   
 }

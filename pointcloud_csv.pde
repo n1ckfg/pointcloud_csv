@@ -6,18 +6,15 @@ Cam cam;
 int densityHigh = 1;
 int densityLow = 20;
 int density = densityLow;
-PFont font;
-int fontSize = 12;
 
 void setup() {
-  size(640, 480, P3D);
-  font = createFont("Arial", fontSize);
-  textFont(font, fontSize);
+  size(960, 540, P3D);
   
   readPointCloud();
   writePointCloud();
   
   cam = new Cam();
+  cam.displayText = "Press space for detail";
   
   strokeWeight(2);
   stroke(255, 127);
@@ -31,12 +28,7 @@ void draw() {
   }
   
   cam.run();
-    
-  pushMatrix();  
-  translate((cam.pos.x - (width/2)) + (fontSize/2), (cam.pos.y - (height/2)) + fontSize, cam.poi.z);
-  text("Press space for detail", 0, 0);
-  popMatrix();
-  
+
   surface.setTitle(""+frameRate);
 }
 
