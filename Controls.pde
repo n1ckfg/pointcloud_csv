@@ -15,8 +15,10 @@ void keyPressed() {
   
   if (key == ' ') {
     density = densityHigh;
+    strokeWeight(strokeWeightHigh);
   } else {
     density = densityLow;
+    strokeWeight(strokeWeightLow);
   }
 }
 

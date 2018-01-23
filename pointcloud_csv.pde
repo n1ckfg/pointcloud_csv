@@ -1,5 +1,6 @@
-String fileName = "stadium.csv";
-boolean csvMode = true; // TODO detect from extension
+String fileName = "stadium.asc";
+String fileNameNoExt = "";
+boolean csvMode = true; 
 float globalScale = 1;
 
 String[] readLines;
@@ -9,17 +10,25 @@ Cam cam;
 int densityHigh = 1;
 int densityLow = 20;
 int density = densityLow;
+int strokeWeightHigh = 2;
+int strokeWeightLow = 6;
 
 void setup() {
   size(960, 540, P3D);
   
+  String[] splits = split(fileName, ".");
+  csvMode = splits[splits.length-1].toLowerCase().equals("csv");
+  for (int i=0; i<splits.length-1; i++) {
+    fileNameNoExt += splits[i];
+  }
+  
   readPointCloud();
-  writePointCloud();
+  if (csvMode) writePointCloud();
   
   cam = new Cam();
   cam.displayText = "Press space for detail";
   
-  strokeWeight(2);
+  strokeWeight(strokeWeightLow);
   stroke(255, 127);
 }
 
@@ -65,7 +74,7 @@ void writePointCloud() {
   for (int i=0; i<points.size(); i++) {
     writeLines[i] = formatPointCloudLine(points.get(i));
   }
-  String url = fileName + ".asc";
+  String url = fileNameNoExt + ".asc";
   saveStrings("data/" + url, writeLines);
   println("Wrote " + url + ".");
 }
