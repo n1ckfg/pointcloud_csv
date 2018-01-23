@@ -61,7 +61,7 @@ void readPointCloud() {
       y = float(pointRaw[1]);
       z = float(pointRaw[2]);
     }
-    if (!Float.isNaN(x) && !Float.isNaN(x) && !Float.isNaN(x)) {
+    if (!Float.isNaN(x) && !Float.isNaN(y) && !Float.isNaN(z)) {
       points.add(new PVector(x, y, z));
       displayPoints.add(new PVector(x, -z, y).mult(globalScale));
     }
