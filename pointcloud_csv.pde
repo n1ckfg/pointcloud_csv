@@ -1,4 +1,4 @@
-String fileName = "stadium.asc";
+String fileName = "stadium.csv";
 String fileNameNoExt = "";
 boolean csvMode = true; 
 float globalScale = 1;
