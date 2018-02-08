@@ -29,15 +29,18 @@ void setup() {
   cam.displayText = "Press space for detail";
   
   strokeWeight(strokeWeightLow);
-  stroke(255, 127);
+  stroke(255,127);
+  fill(127, 10);
 }
 
 void draw() {
   background(0);
+  beginShape(QUADS);
   for (int i=0; i<points.size(); i+=density) {
     PVector p = displayPoints.get(i);
-    point(p.x, p.y, p.z);
+    vertex(p.x, p.y, p.z);
   }
+  endShape();
   
   cam.run();
 
