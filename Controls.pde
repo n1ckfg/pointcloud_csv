@@ -11,8 +11,12 @@ boolean keyE = false;
 boolean keySpace = false;
 
 void keyPressed() {
+  density = densityLow;
+  strokeWeight(strokeWeightLow);
+    
   checkKeyChar(key, true);
   
+  /*
   if (key == ' ') {
     density = densityHigh;
     strokeWeight(strokeWeightHigh);
@@ -20,9 +24,14 @@ void keyPressed() {
     density = densityLow;
     strokeWeight(strokeWeightLow);
   }
+  */
 }
 
+int markTime = 0;
+
 void keyReleased() {
+  markTime = millis();
+  
   checkKeyChar(key, false);
 }
 

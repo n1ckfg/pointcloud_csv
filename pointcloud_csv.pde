@@ -26,7 +26,7 @@ void setup() {
   if (csvMode) writePointCloud();
   
   cam = new Cam();
-  cam.displayText = "Press space for detail";
+  //cam.displayText = "Press space for detail";
   
   strokeWeight(strokeWeightLow);
   stroke(255,127);
@@ -34,8 +34,13 @@ void setup() {
 }
 
 void draw() {
+  if (!keyPressed && millis() > markTime + 100) {
+    density = densityHigh;
+    strokeWeight(strokeWeightHigh);
+  }
+  
   background(0);
-  beginShape(QUADS);
+  beginShape(POINTS);
   for (int i=0; i<points.size(); i+=density) {
     PVector p = displayPoints.get(i);
     vertex(p.x, p.y, p.z);
